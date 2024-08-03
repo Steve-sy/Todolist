@@ -51,7 +51,7 @@ let tasks = [
     {   
         'title': 'traveling to australia',
         'date': '11.11.2024',
-        'isDone': false, 
+        'isDone': true, 
     },
 ]
 
@@ -65,8 +65,7 @@ for (task of tasks) {
     `<div class="row px-3 align-items-center todo-item rounded">
                         <div class="col-auto m-1 p-0 d-flex align-items-center">
                             <h2 class="m-0 p-0">
-                                <i class="fa fa-square-o text-primary btn m-0 p-0" data-toggle="tooltip" data-placement="bottom" title="Mark as complete"></i>
-                                <i class="fa fa-check-square-o text-primary btn m-0 p-0 d-none" data-toggle="tooltip" data-placement="bottom" title="Mark as todo"></i>
+                                <i class="fa ${task.isDone ? 'fa-check-square-o' : 'fa-square-o'} text-primary btn m-0 p-0" onclick="completeTask(${id})" data-toggle="tooltip" data-placement="bottom" title="Mark as complete"></i>
                                 </h2>
                         </div>
                         <div class="col px-1 m-1 d-flex align-items-center">
@@ -129,6 +128,12 @@ document.getElementById("add-text").addEventListener("keypress", function(event)
             tasks.splice(id,1);
             fillTasks();
         }
+    }
+
+    function completeTask(id) {
+        let task = tasks[id];
+        task.isDone = !task.isDone;
+        fillTasks();
     }
 
     function doneUpdateTask(id) {
